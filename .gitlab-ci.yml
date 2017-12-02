@@ -1,0 +1,44 @@
+stages:
+  - build
+  - test 
+  - deploy
+
+compile:
+  stage: build
+  script:
+  - echo "Building project-portal....................................."
+  - pwd
+  - ls
+  -  "export https_proxy=http://10.137.2.14:8080"
+  -  "export http_proxy=http://10.137.2.14:8080"
+  - "npm install"
+  - unset CI
+  - "unset http_proxy"
+  - "ls -l"
+  - "npm run build"
+  artifacts:
+    paths:
+    - build
+    expire_in: 15 mins
+    untracked: true
+    when: on_success
+
+
+test:
+  stage: test
+  script:
+  - echo "Testing....................................................."
+
+
+deploy:
+  stage: deploy
+  script:
+  - echo "Removing Earlier code on Server.........................."
+  - "ssh signage@10.130.9.91 mv --backup=numbered /home/signage/cms/buildDemo /home/signage/cms/buildDemoBackup"
+  - "pwd"
+  - "ls"
+  -  sed -i 's/href="/href="\/signage_portal/g' build/index.html &&  sed -i 's/src="/src="\/signage_portal/g' build/index.html
+  - "scp -r build  signage@10.130.9.91:/home/signage/cms/buildDemo"
+  #- ssh signage@10.130.9.91  "sed -i 's/href="/href="\/signage_portal/g' index.html &&  sed -i 's/src="/src="\/signage_portal/g' index.html"
+
+
