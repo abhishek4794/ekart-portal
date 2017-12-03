@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import $ from 'jquery'
-import icon from '../icons/ic_network.png'
+
 const menuList = ['Store', 'Cart', 'Orders']
 const iconsList = [require('../icons/ic_network.png'),require('../icons/ic_playlist.png'),require('../icons/ic_assets.png'),require('../icons/ic_reports.png')]
 
-const expandables = {
-   
-}
+
 const url = ['/ekart/store', '/ekart/cart', '/ekart/orders']
 class LeftMenu extends Component {
     componentDidMount(){

@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import TopMenu from '../components/TopMenu'
 import LeftMenu from '../components/LeftMenu'
 
-import {fetchList} from '../actions/cartActions'
+import {fetchList,deleteFromCart} from '../actions/cartActions'
 
 class Cart extends Component {
     constructor(){
@@ -22,7 +22,6 @@ class Cart extends Component {
             let list = []
             if(nextprops.list.length!==0){                
                     nextprops.list.map((element,i)=>{
-                        if(element){
                             return(
                                 
                                     list.push(
@@ -45,7 +44,7 @@ class Cart extends Component {
                                         </div>
                                     )
                                 );
-                        }                       
+                                               
                     })
                 }else{
                     list.push(
@@ -55,7 +54,12 @@ class Cart extends Component {
                     )
                 }
 
+                if(nextprops.deleted){
+                    console.log('In deleted')
+                    this.props.dispatch(fetchList())
+                }
                 this.setState({list})
+
             }
     }
     componentWillMount(){
@@ -64,7 +68,8 @@ class Cart extends Component {
        
     }
     deleteFromCart(e,element){
-        console.log(element)
+        console.log(element._id,'<---')
+        this.props.dispatch(deleteFromCart(element._id))
         // handle Delete From cart
     }
     componentDidMount(){
@@ -85,7 +90,7 @@ class Cart extends Component {
             />
             <div id="layout">
                 <div className = "heading" >
-                    Cart
+                    cart
                 </div>
                 <hr />
                 <div style={{padding:'20px'}}>
@@ -125,7 +130,8 @@ class Cart extends Component {
 function select(store){
 
     return{
-        list:store.cart.list
+        list:store.cart.list,
+        deleted:store.cart.deleted
     }
 }
 

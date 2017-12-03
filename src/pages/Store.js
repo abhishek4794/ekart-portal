@@ -13,8 +13,7 @@ class Store extends Component {
         this.state  = {
             list:[],
             popup:false,
-            selectedProduct:{},
-            list:[]
+            selectedProduct:{}
         }
         
     }
@@ -27,7 +26,7 @@ class Store extends Component {
                     return(
                     list.push(
                     <tr key={element.id}  >
-                        <td><img width={200} height={200} src={element.imageUrl}></img></td>
+                        <td><img width={200} height={200} alt={element.id} src={element.imageUrl}></img></td>
                         <td>{element.name}</td>
                         <td>{element.desc}</td>
                         <td>{element.price}</td>

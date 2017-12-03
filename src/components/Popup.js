@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { SkyLightStateless } from 'react-skylight';
+import { addToCart } from '../actions/cartActions.js'
 
-import axios from "axios";
+
 
 let dialogStyles = {
 	width: '40%',
@@ -24,48 +25,24 @@ class Popup extends Component {
 		super();
 
 		this.state = {
-			warning: false,
 			isVisible: true,
-			code: '',
-			contents: [],
-			selectedGroup: "default",
-			playerName: ''
+			quantity: 1
 		}
 	}
 
 	componentWillReceiveProps = (nextProps) => {
-		
-		// if(nextProps.player.registering){
-
-		// }
-		// else{
-		// 	console.log("====-=-=-=-=-=-=-=-=",nextProps.groupList)
-		// 	var list=[<option key="0" value="default">default</option>]
-		// 	var lists=nextProps.groupList;
-
-		// 	for(var i=0;i<lists.length;i++){
-		// 		list.push(
-		// 			<option key={i+1} value={lists[i]}>{lists[i]}</option>
-		// 		)
-		// 	}
-		// 	this.setState({
-		// 		contents:list
-		// 	})
-		// 	if(nextProps.player.registered){
-		// 		alert("Device Sucessfully Registered")
-		// 	}
-		// }
+		console.log(nextProps.cart.added)
+		if(nextProps.cart.added){
+			alert('Item Added to cart')
+			this.props.changeState()
+			this.popupClicked()
+		}
 	}
 
 	componentWillMount() {
 
 	}
-	selectGroup() {
-		this.setState({
-			selectedGroup: document.getElementById("groupSelector").value
-		})
-		console.log(this.state.selectedGroup)
-	}
+	
 
 	popupClicked() {
 		this.setState({ isVisible: false })
@@ -73,45 +50,10 @@ class Popup extends Component {
 	clicked(e) {
 		e.preventDefault();
 
-		/*if (this.state.code === "" || this.state.playerName === "") {
-			this.setState({ warning: true });
-		} else {
-			this.setState({ warning: false });*/
-			this.addToCart();
-			//this.props.dispatch(registerPlayer(this.state.code,this.state.selectedGroup,this.state.playerName))
-		//}
+		
+			this.props.dispatch(addToCart(parseInt(this.state.quantity),this.props.selectedProduct));
+		
 	}
-	addToCart() {
-
-
-	/*	axios({
-			method: 'post',
-			url: localStorage.getItem('apiUrl') + "Registration/apis/v1/validate/validate",
-			headers: { appkey: 'DAMoabUemd', "Content-Type": "application/json", vendorId: localStorage.getItem('vendorId') },
-			data: {
-				code: this.state.code,
-				groupName: this.state.selectedGroup,
-				deviceName: this.state.playerName
-
-			}
-		}).then((response) => {
-			console.log(response.data.code)
-			console.log("Done")
-			if (response.data.messageCode !== 200) {
-				alert("Player not found OR Player name already exists")
-			}
-			else {*/
-				this.props.changeState()
-				this.popupClicked()
-		/*	}
-		})
-			.catch((err) => {
-				console.log(err)
-			})*/
-
-
-	}
-
 	render() {
 		return (
 
@@ -132,7 +74,7 @@ class Popup extends Component {
 						Please Specify Quantity
 						<br />
 						<br />
-						<input type="text" className="form-control" name="Quantity" placeholder="Quantity" required="" autoFocus="" onChange={(e) => { this.setState({ code: e.target.value }) }} />
+						<input type="number" defaultValue={1} className="form-control" name="Quantity" placeholder="Quantity" required="" autoFocus="" onChange={(e) => { this.setState({ quantity: e.target.value }) }} required/>
 						<br />
 
 						Choose a color from the following
@@ -158,8 +100,7 @@ class Popup extends Component {
 
 function select(store) {
 	return {
-		player: store.player,
-		groupList: store.group.groupList
+		cart: store.cart
 	}
 }
 

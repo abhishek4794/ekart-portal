@@ -1,17 +1,18 @@
 import axios from "axios";
-import conf from "../conf"
+
 export function login(username,password) {
 
 return function(dispatch) {
   axios({
       method:'post',
-      url:conf.env.url,
-      headers:{appkey:'DAMoabUemd',"Content-Type":"application/json"},
+      url:'http://127.0.0.1:4794/apis/login/login',
+      headers:{"Content-Type":"application/json"},
        data:{
           "username":username,
           "password":password
         }
       }).then(function (response) {
+
             dispatch({type: "LOGIN_FULFILLED", payload: response})
  
         })

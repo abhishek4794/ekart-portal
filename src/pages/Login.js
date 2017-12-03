@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import axios from 'axios';
 import { connect } from "react-redux";
 //import createHistory from 'history/createBrowserHistory';
 import {login} from "../actions/loginAction.js";
@@ -42,7 +41,7 @@ class Login extends Component {
               <h2 className="form-signin-heading">Please login</h2>
               <input type="text" className="form-control" name="username" placeholder="Username" required="" autoFocus="" onChange={(e)=>{this.setState({username: e.target.value})}} />
               <input type="password" className="form-control" name="password" placeholder="Password" required="" onChange={(e)=>{this.setState({password: e.target.value})}} />      
-              <div style={this.state.code==200?{color:"green"}:{color:"red"}}>
+              <div style={this.state.code===200?{color:"green"}:{color:"red"}}>
                 <center>{this.state.loginMessage}</center>
               </div>
               <button className="btn btn-lg btn-primary btn-block" autoFocus onClick={()=>this.doLogin()}>Login</button>   

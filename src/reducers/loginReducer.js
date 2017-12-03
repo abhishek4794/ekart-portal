@@ -1,4 +1,4 @@
-import conf from "../conf"
+
 export default function reducer(state={
     userData: [],
     logging: false,
@@ -15,8 +15,7 @@ export default function reducer(state={
       case "LOGIN_FULFILLED": {
         console.log(action.payload.data)
         localStorage.setItem('displayName', action.payload.data.displayName);
-        localStorage.setItem('apiUrl', conf.env.apiUrl);
-        localStorage.setItem('vendorId', action.payload.data.vendorId);
+        localStorage.setItem('uniqueId', action.payload.data.uniqueId);
         return {
           ...state,
           logging: false,
