@@ -2,7 +2,7 @@
 Steps :-
 1) npm install
 2) Open localhost:3000/ekart/ Url in browser
-3) Default User is created with Id - user1 Password - user1
+3) 2 Default Users are created with Id - user1 Password - user1 & Id - user2 Password - user2
 4) Product List is prefetched as soon server gets started.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
