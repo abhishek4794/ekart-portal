@@ -26,24 +26,46 @@ class Popup extends Component {
 
 		this.state = {
 			isVisible: true,
-			quantity: 1
+			quantity: 1,
+			colors:[]
 		}
 	}
 
 	componentWillReceiveProps = (nextProps) => {
-		console.log(nextProps.cart.added)
+		
+
+
 		if(nextProps.cart.added){
 			alert('Item Added to cart')
 			this.props.changeState()
 			this.popupClicked()
 		}
 	}
+	componentDidMount(){
 
+		let list = []
+
+		let lists = this.props.selectedProduct.colors || [];
+
+		for (var i = 0; i < lists.length; i++) {
+			list.push(
+				<option key={i + 1} value={lists[i]}>{lists[i]}</option>
+			)
+		}
+		this.setState({
+			colors: list,
+			color:this.props.selectedProduct.color
+		})
+	}
 	componentWillMount() {
 
 	}
 	
-
+	selectColor(){
+		this.setState({
+			color: document.getElementById("colorSelector").value
+		})
+	}
 	popupClicked() {
 		this.setState({ isVisible: false })
 	}
@@ -51,7 +73,7 @@ class Popup extends Component {
 		e.preventDefault();
 
 		
-			this.props.dispatch(addToCart(parseInt(this.state.quantity),this.props.selectedProduct));
+			this.props.dispatch(addToCart(parseInt(this.state.quantity),this.props.selectedProduct,this.state.color));
 		
 	}
 	render() {
@@ -69,6 +91,7 @@ class Popup extends Component {
 					<center>Add to Cart</center></div>
 					<center>Item Name :- { this.props.selectedProduct.name}</center>
 					<center>Item Price :- { this.props.selectedProduct.price }</center>
+					<center>Item Color :- { this.state.color }</center>
 
 					<form className="form-signin" onSubmit={() => this.popupClicked()}>
 						Please Specify Quantity
@@ -77,14 +100,18 @@ class Popup extends Component {
 						<input type="number" defaultValue={1} className="form-control" name="Quantity" placeholder="Quantity" required="" autoFocus="" onChange={(e) => { this.setState({ quantity: e.target.value }) }} required/>
 						<br />
 
+						{(this.props.selectedProduct.colors)?
+							<div>
 						Choose a color from the following
 						<br />
 						<br />
-						<select className="form-control" id="groupSelector" onChange={() => this.selectGroup()}>
+						<select className="form-control" id="colorSelector" onChange={() => this.selectColor()}>
 
-							{this.state.contents}
+							{this.state.colors}
 						</select>
 						<br />
+						</div>
+					 : null }
 						
 						<button className="btn btn-lg btn-primary btn-block a" type="submit" onClick={(e) => this.clicked(e)}>Add To Cart</button>
 					</form>

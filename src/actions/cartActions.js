@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function addToCart(quantity,item){
+export function addToCart(quantity,item,color){
 	
 	return function(dispatch){
 		dispatch({type:"ADD_CART"})
@@ -12,6 +12,7 @@ export function addToCart(quantity,item){
 		       data:{
 		          quantity,
 		          item,
+		          color,
 		          uniqueId:localStorage.getItem('uniqueId')
 		        }
 		      }).then(function (response) {
@@ -28,7 +29,7 @@ export function addToCart(quantity,item){
 	}
 }
 
-export function deleteFromCart(id){
+export function deleteFromCart(item){
 	
 	return function(dispatch){
 		dispatch({type:"ADD_CART"})
@@ -38,7 +39,7 @@ export function deleteFromCart(id){
 		      url:'http://127.0.0.1:4794/apis/cart/delete',
 		       headers:{"Content-Type":"application/json"},
 		       data:{
-		          id,
+		          item,
 		          uniqueId:localStorage.getItem('uniqueId')
 		        }
 		      }).then(function (response) {
@@ -69,9 +70,32 @@ export function fetchList(){
 			}
 		}).then((response)=>{
 			console.log(response)
-			dispatch({type:"FETCH_CART_FULLFILLED",payload:response.data.data})
+			dispatch({type:"FETCH_CART_FULLFILLED",payload:response.data.data,totalCost:response.data.totalCost})
 		}).catch((err)=>{
 			dispatch({type:"FETCH_CART_REJECTED",payload:err})
+			
+			console.log(err)
+		})
+	}
+}
+
+export function placeOrder(){
+	
+	return function(dispatch){
+		dispatch({type:"PLACE_ORDERS"})
+
+
+		axios({
+			method:'POST',
+			url:"http://127.0.0.1:4794/apis/order/place",
+			headers:{ "Content-Type":"application/json"},
+			data:{
+				uniqueId:localStorage.getItem('uniqueId')
+			}
+		}).then((response)=>{
+			dispatch({type:"PLACE_ORDERS_FULLFILLED",payload:response.data.message})
+		}).catch((err)=>{
+			dispatch({type:"PLACE_ORDERS_REJECTED",payload:err})
 			
 			console.log(err)
 		})

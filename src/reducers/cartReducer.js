@@ -6,7 +6,9 @@ export default function reducer(state={
     added:false,
     deleting:false,
     deleted:false,
-    error: null
+    error: null,
+    orderPlaced:false,
+    totalCost:0
   }, action) {
   	  switch (action.type) {
       case "FETCH_CART": {
@@ -16,6 +18,7 @@ export default function reducer(state={
           added:false,
           deleting:false,
           deleted:false,
+          orderPlaced:false
         }
       }
       case "FETCH_CART_REJECTED": {
@@ -28,6 +31,7 @@ export default function reducer(state={
           fetching:false,
           fetched: true,
           list: action.payload,
+          totalCost:action.totalCost
         }
       }
       case "ADD_CART":{
@@ -44,6 +48,15 @@ export default function reducer(state={
       }
       case "DELETE_CART_FULFILLED":{
         return {...state, deleting: true,deleted:true}
+      }
+      case "PLACE_ORDERS": {
+        return {...state,orderPlaced:false}
+      }
+      case "PLACE_ORDERS_REJECTED": {
+        return {...state, error: action.payload}
+      }
+      case "PLACE_ORDERS_FULLFILLED": {
+        return {...state,orderPlaced:true}
       }
 	  default : {
         return state

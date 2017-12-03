@@ -5,17 +5,24 @@ import { connect } from "react-redux"
 import TopMenu from '../components/TopMenu'
 import LeftMenu from '../components/LeftMenu'
 
-import {fetchList,deleteFromCart} from '../actions/cartActions'
+import {fetchList,deleteFromCart,placeOrder} from '../actions/cartActions'
+
 
 class Cart extends Component {
     constructor(){
         super();
         this.state  = {
-            list : []
+            list : [],
+            totalCost:0
         }
         
     }
     componentWillReceiveProps(nextprops){
+
+        if(nextprops.orderPlaced){
+            alert('Order Placed Sucessfully')
+            this.props.dispatch(fetchList())
+        }
 
         if(nextprops.list){
 
@@ -39,6 +46,15 @@ class Cart extends Component {
                                                 <b>Quantity:</b> {element.quantity}
                                             </div>
                                             <div className="assetsInfo">    
+                                                <b>Price:</b> {element.price}
+                                            </div>
+                                            <div className="assetsInfo">    
+                                                <b>Cost:</b> {element.cost}
+                                            </div>
+                                            <div className="assetsInfo">    
+                                                <b>Color:</b> {element.color}
+                                            </div>
+                                            <div className="assetsInfo">    
                                               <i className="fa fa-trash-o fa-2x" onClick={(e)=>{this.deleteFromCart(e,element)}} aria-hidden="true"></i>
                                             </div>
                                         </div>
@@ -58,7 +74,7 @@ class Cart extends Component {
                     console.log('In deleted')
                     this.props.dispatch(fetchList())
                 }
-                this.setState({list})
+                this.setState({list,totalCost:nextprops.totalCost})
 
             }
     }
@@ -68,8 +84,7 @@ class Cart extends Component {
        
     }
     deleteFromCart(e,element){
-        console.log(element._id,'<---')
-        this.props.dispatch(deleteFromCart(element._id))
+        this.props.dispatch(deleteFromCart(element))
         // handle Delete From cart
     }
     componentDidMount(){
@@ -77,6 +92,8 @@ class Cart extends Component {
     }
     handleCharge(){
         // handle Charge
+
+        this.props.dispatch(placeOrder())
     }
     render() {
         
@@ -96,8 +113,16 @@ class Cart extends Component {
                 <div style={{padding:'20px'}}>
                                    
                 <br></br>
-
-                <div style={{padding:'20px'}}>
+                Total Cost :- {this.state.totalCost}
+                        <center>
+                        <button 
+                                onClick={()=>this.handleCharge()} 
+                                type="button" 
+                                className="btn btn-primary a">
+                                    Charge
+                        </button>
+                        </center>
+                <div style={{padding:'20px',overflow:'scroll'}}>
                         <div className="assetsList" style={{fontSize:'20px',backgroundColor:'#fba151', color:'black', borderTopLeftRadius:'10px', borderTopRightRadius:'10px'}}>
                                     <center>Cart  
                                         ({this.props.list?
@@ -109,14 +134,7 @@ class Cart extends Component {
                                 </div>
                                 {this.state.list}
                         <br></br>
-                        <center>
-                        <button 
-                                onClick={()=>this.handleCharge()} 
-                                type="button" 
-                                className="btn btn-primary a">
-                                    Charge
-                        </button>
-                        </center>
+
                     </div>
 
                 </div>
@@ -131,7 +149,9 @@ function select(store){
 
     return{
         list:store.cart.list,
-        deleted:store.cart.deleted
+        totalCost:store.cart.totalCost,
+        deleted:store.cart.deleted,
+        orderPlaced:store.cart.orderPlaced
     }
 }
 

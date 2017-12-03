@@ -18,19 +18,57 @@ class Orders extends Component {
         
     }
     componentWillReceiveProps(nextprops){
-        console.log(nextprops.list)
+
         let list = []
         if(nextprops.list.length){
                 nextprops.list.map((element,i)=>{
-                    
+                    let items = []
+
+                    element.items.map((innerelement,j)=>{
+                        items.push(
+                                <div>
+                                 <div className="assetsInfo">
+                                                <b>Name</b>: {innerelement.name}<br />
+                                            </div>
+                                            
+                                            <div className="assetsInfo">    
+                                                <b>Price: </b> {innerelement.price}
+                                            </div>
+                                            
+                                            <div className="assetsInfo">    
+                                                <b>Quantity:</b> {innerelement.quantity}
+                                            </div>
+                                            <br />
+                                 </div>           
+                            )
+                    })
+
                     return(
                     list.push(
-                    <tr key={element.id}  >
-                        <td><img width={200} height={200} alt={element.name} src={element.imageUrl}></img></td>
-                        <td>{element.name}</td>
-                        <td>{element.price}</td>
-                        <td>{element.quantity}</td>
-                    </tr>
+                         <div className='assetsList' key={element.orderId}>
+                                            
+                                            
+                                            {/* <i  className="fa fa-hand-o-left fa-2x" onClick={(e)=>{this.addToPlaylist(e,element)}}aria-hidden="true"></i> */}
+                                            
+                                            <div className="assetsInfo">
+                                                <b>Order Id</b>: {element.orderId}<br />
+                                            </div>
+                                            
+                                            <div className="assetsInfo">    
+                                                <b>Order Date:</b> {element.orderDate}
+                                            </div>
+                                            
+                                            <div className="assetsInfo">    
+                                                <b>Total Cost:</b> {element.totalCost}
+                                            </div>
+                                            <br />
+                                            <div className="assetsInfo">    
+                                                <b>Items</b> {element.items.length}
+                                            </div>
+                                            {items}
+                                            
+                                        </div>
+
                     )
                     )
                     
@@ -68,30 +106,22 @@ class Orders extends Component {
                                    
                 <br></br>
 
-                <div style={{padding:'20px'}}>
-                        <div id="tableWrapper" >
-                                <table className="table table-bordered" >
-                                    <thead className="thead">
-
-                                        
-                                        <th>Product Image</th>
-                                        <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-
-                                        {/* <th>Player Group</th> */}
-
-
-                                    </thead>
-                                    <tbody>
-                                        {this.state.list}
-                                    </tbody>
-                                </table>
-
-                            </div>
+                
+                 <div style={{padding:'20px',overflow:'scroll'}}>
+                        <div className="assetsList" style={{fontSize:'20px',backgroundColor:'#fba151', color:'black', borderTopLeftRadius:'10px', borderTopRightRadius:'10px'}}>
+                                    <center>Orders  
+                                        ({this.props.list?
+                                            this.props.list.length
+                                            :
+                                            "0" 
+                                        })
+                                    </center>
+                                </div>
+                                {this.state.list}
                         <br></br>
 
                     </div>
+
                 </div>
             </div>
             {this.state.popup ? <Popup selectedProduct={this.state.selectedProduct} changeState={this.changeState.bind(this)} /> : null}
