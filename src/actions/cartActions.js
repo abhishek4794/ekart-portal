@@ -89,7 +89,7 @@ export function placeOrder(){
 
 		axios({
 			method:'POST',
-			url:conf.baseUrl+"/apis/order/place",
+			url:conf.baseUrl+"apis/order/place",
 			headers:{ "Content-Type":"application/json"},
 			data:{
 				uniqueId:localStorage.getItem('uniqueId')
