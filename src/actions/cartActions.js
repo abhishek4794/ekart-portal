@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { conf } from '../conf.js';
+
 export function addToCart(quantity,item,color){
 	
 	return function(dispatch){
@@ -7,7 +9,7 @@ export function addToCart(quantity,item,color){
 
 		  axios({
 		      method:'post',
-		      url:'http://127.0.0.1:4794/apis/cart/add',
+		      url:conf.baseUrl+'apis/cart/add',
 		       headers:{"Content-Type":"application/json"},
 		       data:{
 		          quantity,
@@ -36,7 +38,7 @@ export function deleteFromCart(item){
 
 		  axios({
 		      method:'post',
-		      url:'http://127.0.0.1:4794/apis/cart/delete',
+		      url:conf.baseUrl+'apis/cart/delete',
 		       headers:{"Content-Type":"application/json"},
 		       data:{
 		          item,
@@ -63,7 +65,7 @@ export function fetchList(){
 	
 		axios({
 			method:'POST',
-			url:'http://127.0.0.1:4794/apis/cart/list',
+			url:conf.baseUrl+'apis/cart/list',
 			headers:{"Content-Type":"application/json"},
 			data:{
 				uniqueId:localStorage.getItem('uniqueId')
@@ -87,7 +89,7 @@ export function placeOrder(){
 
 		axios({
 			method:'POST',
-			url:"http://127.0.0.1:4794/apis/order/place",
+			url:conf.baseUrl+"/apis/order/place",
 			headers:{ "Content-Type":"application/json"},
 			data:{
 				uniqueId:localStorage.getItem('uniqueId')

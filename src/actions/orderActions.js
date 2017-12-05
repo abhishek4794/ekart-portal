@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { conf } from '../conf.js';
 
 export function fetchList(){
 	
@@ -9,7 +9,7 @@ export function fetchList(){
 
 		axios({
 			method:'POST',
-			url:"http://127.0.0.1:4794/apis/order/list",
+			url:conf.baseUrl+"apis/order/list",
 			headers:{ "Content-Type":"application/json"},
 			data:{
 				uniqueId:localStorage.getItem('uniqueId')

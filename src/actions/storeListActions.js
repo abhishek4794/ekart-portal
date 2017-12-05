@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { conf } from '../conf.js';
 
 export function fetchList(){
 	
@@ -8,7 +8,7 @@ export function fetchList(){
 		
 		axios({
 			method:'GET',
-			url:'http://127.0.0.1:4794/apis/products/list'
+			url:conf.baseUrl+'apis/products/list'
 		}).then((response)=>{
 			dispatch({type:"FETCH_LIST_FULLFILLED",payload:response.data.data})
 		}).catch((err)=>{

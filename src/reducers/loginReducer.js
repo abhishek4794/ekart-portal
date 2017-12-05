@@ -13,7 +13,6 @@ export default function reducer(state={
         return {...state, logging: false, error: action.payload}
       }
       case "LOGIN_FULFILLED": {
-        console.log(action.payload.data)
         localStorage.setItem('displayName', action.payload.data.displayName);
         localStorage.setItem('uniqueId', action.payload.data.uniqueId);
         return {
