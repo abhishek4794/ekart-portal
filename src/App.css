@@ -938,11 +938,11 @@ end of menu
 
 
     #left{
-    	height: 8%;
+    	height: 10%;
     	margin: -1px;
     	top: 12%;
         position: fixed;
-
+        
         bottom: 0;
 
         width:100%;
