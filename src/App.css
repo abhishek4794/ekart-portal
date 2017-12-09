@@ -936,13 +936,18 @@ end of menu
 	}
 @media (max-width:50em) {
 
-
+	.custom-menu-bar {
+		height: 10%;
+		display: flex;
+	    align-items: center;
+	    justify-content: left;
+	}
     #left{
     	height: 10%;
     	margin: -1px;
-    	top: 12%;
+    	top: 10%;
         position: fixed;
-        
+
         bottom: 0;
 
         width:100%;
