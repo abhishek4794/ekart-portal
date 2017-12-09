@@ -942,17 +942,22 @@ end of menu
 	    align-items: center;
 	    justify-content: left;
 	}
+	.custom-menu-bar .ekart-title {
+		padding-left: 10px;
+	}
+	.custom-menu-bar .user-logout{
+		position: absolute;
+    	right: 5px;
+	}
     #left{
     	height: 10%;
-    	margin: -1px;
+    	margin-top: -1px;
     	top: 10%;
         position: fixed;
 
         bottom: 0;
 
         width:100%;
-
-
 
     }
 

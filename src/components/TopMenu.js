@@ -11,9 +11,9 @@ class TopMenu extends Component {
 		return (
 
         <ul className="custom-menu-bar" style={styles.ul}>
-			<li style={styles.li}><div id="brandName">E Kart</div></li>
+			<li className="ekart-title" style={styles.li}><div id="brandName">E Kart</div></li>
 			{/* <font size="6"><b></b></font> */}
-            <li onClick={() => this.handleLogout()} style={styles.user}>{localStorage.getItem('displayName')} <i style={{float:'right'}} className="fa fa-sign-out" aria-hidden="true"></i></li>
+            <li className="user-logout" onClick={() => this.handleLogout()} style={styles.user}>{localStorage.getItem('displayName')} <i style={{float:'right'}} className="fa fa-sign-out" aria-hidden="true"></i></li>
         </ul>
 			
 		);
