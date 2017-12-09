@@ -17,16 +17,14 @@ class LeftMenu extends Component {
             
                 return(
                     menu.push(
-                        <div>
-                            <li onClick={()=>{
-                                    this.props.history.push(url[i])
-                                }}
-                                
-                                style={this.props.activeMenu===element?styles.liActive:styles.li}>
+                            <div
+                                onClick={()=>{this.props.history.push(url[i])}}    
+                                className={this.props.activeMenu===element?"leftactive":"leftinactive"}
+                            >
+                            {console.log(this.props.activeMenu,"0000000000000000")}
                                 <img src={iconsList[i]} width="20px" height="20px" alt="icon not found"></img>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 {element}
-                            </li>
                         </div>
                     )
                 );
@@ -38,10 +36,10 @@ class LeftMenu extends Component {
 	render() {
 		return (
 			
-			<ul id="left" style={styles.ul}>
+			<div id="left">
                 {this.renderMenu()}
                 {/* <img src={require(""+iconsList[0]+"")} width="20px" height="20px" alt="icon not found"></img>  */}
-            </ul>
+            </div>
 		);
 	}
 }

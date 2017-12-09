@@ -26,11 +26,11 @@ class Store extends Component {
                     return(
                     list.push(
                     <tr key={element.id}  >
-                        <td><img width={200} height={200} alt={element.id} src={element.imageUrl}></img></td>
-                        <td>{element.name}</td>
-                        <td>{element.desc}</td>
-                        <td>{element.price}</td>
-                        <td> 
+                        <td data-th="Product Image"><img width={200} height={200} alt={element.id} src={element.imageUrl}></img></td>
+                        <td data-th="Name">{element.name}</td>
+                        <td data-th="Description">{element.desc}</td>
+                        <td data-th="Price">{element.price}</td>
+                        <td data-th="Action"> 
                             <button 
                                 onClick={()=>this.handleTr(element)} 
                                 type="button" 
@@ -74,7 +74,7 @@ class Store extends Component {
             {/* <Menu history={this.props.history}/> */}
 			<TopMenu />
 			<LeftMenu 
-                activeMenu={this.state.activeMenu} 
+                activeMenu={"Store"} 
                 history={this.props.history}
             />
             <div id="layout">
@@ -88,8 +88,8 @@ class Store extends Component {
 
                 <div style={{padding:'20px'}}>
                         <div id="tableWrapper" >
-                                <table className="table table-bordered" >
-                                    <thead className="thead">
+                                <table className="rwd-table" >
+                                    <thead >
 
                                         
                                         <th>Product Image</th>

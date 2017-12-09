@@ -94,7 +94,7 @@ class Orders extends Component {
             {/* <Menu history={this.props.history}/> */}
             <TopMenu />
             <LeftMenu 
-                activeMenu={this.state.activeMenu} 
+                activeMenu={"Orders"} 
                 history={this.props.history}
             />
             <div id="layout">

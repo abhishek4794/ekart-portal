@@ -102,7 +102,7 @@ class Cart extends Component {
             {/* <Menu history={this.props.history}/> */}
             <TopMenu />
             <LeftMenu 
-                activeMenu={this.state.activeMenu} 
+                activeMenu={"Cart"} 
                 history={this.props.history}
             />
             <div id="layout">
@@ -110,7 +110,7 @@ class Cart extends Component {
                     cart
                 </div>
                 <hr />
-                <div style={{padding:'20px'}}>
+                <div style={{padding:'20px',overflow:'scroll'}}>
                                    
                 <br></br>
                 Total Cost :- {this.state.totalCost}
