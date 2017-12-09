@@ -10,7 +10,7 @@ class TopMenu extends Component {
 	render() {
 		return (
 
-        <ul style={styles.ul}>
+        <ul className="custom-menu-bar" style={styles.ul}>
 			<li style={styles.li}><div id="brandName">E Kart</div></li>
 			{/* <font size="6"><b></b></font> */}
             <li onClick={() => this.handleLogout()} style={styles.user}>{localStorage.getItem('displayName')} <i style={{float:'right'}} className="fa fa-sign-out" aria-hidden="true"></i></li>
