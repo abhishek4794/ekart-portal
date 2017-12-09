@@ -110,7 +110,7 @@ class Cart extends Component {
                     cart
                 </div>
                 <hr />
-                <div style={{padding:'20px',overflow:'scroll'}}>
+                <div style={{padding:'20px'}}>
                                    
                 <br></br>
                 Total Cost :- {this.state.totalCost}

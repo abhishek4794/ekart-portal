@@ -40,7 +40,6 @@ const styles={
 		float:'right',
 		padding:'26px',
 		color:'white',
-		marginRight:'25px',
 		marginTop: '7px',
         cursor: 'pointer',
 

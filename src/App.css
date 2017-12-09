@@ -936,15 +936,18 @@ end of menu
 	}
 @media (max-width:50em) {
 
-    #left{
 
+    #left{
+    	height: 10%;
+    	margin: -1px;
+    	top: 12%;
         position: fixed;
 
         bottom: 0;
 
         width:100%;
 
-        height:50px;
+
 
     }
 
@@ -958,17 +961,15 @@ end of menu
     }
     div#layout {
 
-        
+
+		height: 80%;
+		margin-top: 31%;
     	margin-left:0%;
         position: fixed;
 
         width: 100%;
 
         margin-left: 0%;
-
-        margin-top:136px;
-
-        height: 100%;
 
         background-color: #FFFFFF;
 
@@ -1038,6 +1039,7 @@ styling for table-layout:
     padding-right: 0;
   }
 }
+
 @media only screen and (max-width: 780px) {
 	.skylight-dialog {
 		width: 70% !important;
